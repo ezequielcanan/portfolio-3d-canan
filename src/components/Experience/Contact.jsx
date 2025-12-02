@@ -26,7 +26,7 @@ const Contact = () => {
       // agrega otros campos que use tu template en EmailJS
     };
 
-    emailjs.send("service_xuigz3q", "template_lspnv1g", templateParams, "SEOVb5ZcvAw6kmfQK")
+    emailjs.send(import.meta.env.VITE_SERVICE_ID_EMAIL, import.meta.env.VITE_TEMPLATE_ID_EMAIL, templateParams, import.meta.env.VITE_OPTIONS_EMAIL)
       .then((response) => {
         //console.log("SUCCESS!", response.status, response.text);
         reset();
