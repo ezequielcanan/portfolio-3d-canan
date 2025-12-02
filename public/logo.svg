@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1000" height="1000" viewBox="0 0 1000 1000" xml:space="preserve">
+<desc>Created with Fabric.js 3.5.0</desc>
+<defs>
+</defs>
+<g transform="matrix(3.2685 0 0 3.2685 499.9874 342.2005)" id="736304">
+<g style="" vector-effect="non-scaling-stroke">
+		<g transform="matrix(2 0 0 2 0 0)">
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;" x="-128" y="-128" rx="0" ry="0" width="256" height="256"/>
+</g>
+		<g transform="matrix(2 0 0 2 0 52)">
+<linearGradient id="SVGID_2" gradientUnits="objectBoundingBox" gradientTransform="matrix(1 0 0 1 0 0)" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" style="stop-color:rgb(155,92,255);stop-opacity: 1"/>
+<stop offset="100%" style="stop-color:rgb(106,43,214);stop-opacity: 1"/>
+</linearGradient>
+<polygon style="stroke: rgb(0,246,255); stroke-width: 5; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: url(#SVGID_2); fill-rule: nonzero; opacity: 1;" points="-72,-66 72,-66 0,66 "/>
+</g>
+		<g transform="matrix(2 0 0 2 0 -16)">
+<line style="stroke: rgb(0,246,255); stroke-width: 10; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 0.85;" x1="-42" y1="0" x2="42" y2="0"/>
+</g>
+		<g transform="matrix(2 0 0 2 0 24)">
+<line style="stroke: rgb(0,246,255); stroke-width: 10; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 0.85;" x1="-27" y1="0" x2="27" y2="0"/>
+</g>
+		<g transform="matrix(2 0 0 2 0 64)">
+<line style="stroke: rgb(0,246,255); stroke-width: 10; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 0.85;" x1="-12" y1="0" x2="12" y2="0"/>
+</g>
+</g>
+</g>
+</svg>

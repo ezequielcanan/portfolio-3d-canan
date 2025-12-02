@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="512" height="512">
+  <!-- Filters: simple glow -->
+  <defs>
+    <linearGradient id="g-violet" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#9b5cff"/>
+      <stop offset="100%" stop-color="#6a2bd6"/>
+    </linearGradient>
+
+    <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-violet" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Transparent background -->
+  <rect width="256" height="256" fill="transparent"/>
+
+  <!-- Inverted pyramid / base island -->
+  <polygon points="56,88 200,88 128,220"
+           fill="url(#g-violet)"
+           stroke="#00F6FF"
+           stroke-width="2"
+           stroke-linejoin="round"
+           filter="url(#glow-violet)"/>
+
+  <!-- Simple horizontal block lines on the pyramid -->
+  <g stroke="#00F6FF" stroke-width="1" stroke-linecap="round" opacity="0.85" filter="url(#glow-cyan)">
+    <line x1="86" y1="120" x2="170" y2="120"/>
+    <line x1="101" y1="140" x2="155" y2="140"/>
+    <line x1="116" y1="160" x2="140" y2="160"/>
+  </g>
+</svg>
