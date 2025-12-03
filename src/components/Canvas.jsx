@@ -1,4 +1,4 @@
-import { Suspense, useState, useRef, useContext, useEffect } from "react";
+import { Suspense, useState, useRef, useContext, useEffect, useCallback } from "react";
 import { Canvas as CanvasThree } from "@react-three/fiber";
 import { OrbitControls, Html, PerspectiveCamera, useProgress } from "@react-three/drei";
 import * as THREE from "three";
@@ -33,11 +33,11 @@ export default function Canvas() {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   // When the scene finishes loading (progress reaches 100), enable the Start button
   const finishedLoading = loaded === 54
   const realProgress = loaded / 54 * 100
@@ -72,11 +72,32 @@ export default function Canvas() {
     setOverlayClosing(true);
   };
 
+  const handleKeyDown = useCallback((e) => {
+    const targetTag = e.target?.tagName;
+    if (targetTag === "INPUT" || targetTag === "TEXTAREA" || e.metaKey || e.ctrlKey) return;
+    if (e.key === "m" || e.key === "M") {
+      if (!audioManager.getMuteState()) {
+        backgroundAudio.volume = 0
+      } else {
+        backgroundAudio.volume = 0.2
+      }
+      audioManager.toggleMute();
+    }
+  }, []);
+
   useEffect(() => {
     if (origin) {
       setPlayBackground(true)
     }
   }, [origin])
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown])
 
   useEffect(() => {
     if (!islandAnimation && (origin || (!origin && transparent)) && started && !animating && playBackground) {

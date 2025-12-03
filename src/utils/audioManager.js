@@ -2,11 +2,20 @@
 let audioContext = null;
 const buffers = new Map();
 let unlocked = false;
+let masterGainNode = null;
+let isMuted = false;
+let volumeBeforeMute = 1.0; // Guardar volumen antes de mutear
 
 function getAudioContext() {
   if (audioContext) return audioContext;
   const AC = window.AudioContext || window.webkitAudioContext;
   audioContext = new AC();
+
+  // Crear nodo de ganancia maestro
+  masterGainNode = audioContext.createGain();
+  masterGainNode.connect(audioContext.destination);
+  masterGainNode.gain.value = 1.0;
+
   return audioContext;
 }
 
@@ -38,19 +47,24 @@ export function play(name, options = {}) {
   const buffer = buffers.get(name);
   if (!buffer) {
     console.warn(`[audioManager] buffer not loaded: ${name}`);
-    return;
+    return null;
   }
+
   const source = ctx.createBufferSource();
   source.buffer = buffer;
 
-  // gain node for volume control
+  // gain node para control de volumen individual
   const gain = ctx.createGain();
   gain.gain.value = options.volume ?? 1;
 
-  source.connect(gain).connect(ctx.destination);
+  // Conectar: source → gain → masterGain → destination
+  source.connect(gain);
+  gain.connect(masterGainNode);
 
   // scheduling: start immediately relative to audioContext time
-  source.start(0);
+  const when = ctx.currentTime + (options.delay || 0);
+  source.start(when);
+
   return source; // can stop if needed
 }
 
@@ -68,4 +82,44 @@ export function resumeIfNeeded() {
 
 export function isUnlocked() {
   return unlocked;
+}
+
+// Función para alternar mute
+export function toggleMute() {
+  if (!masterGainNode) return;
+
+  if (isMuted) {
+    // Desmutear: restaurar volumen anterior
+    masterGainNode.gain.value = volumeBeforeMute;
+    isMuted = false;
+  } else {
+    // Mutear: guardar volumen actual y poner en 0
+    volumeBeforeMute = masterGainNode.gain.value;
+    masterGainNode.gain.value = 0;
+    isMuted = true;
+  }
+
+  return isMuted;
+}
+
+// Función para obtener estado del mute
+export function getMuteState() {
+  return isMuted;
+}
+
+// Función para establecer volumen maestro
+export function setMasterVolume(volume) {
+  if (!masterGainNode) return;
+  masterGainNode.gain.value = Math.max(0, Math.min(1, volume));
+
+  // Si estamos muteados y cambiamos el volumen, actualizar volumeBeforeMute
+  if (isMuted) {
+    volumeBeforeMute = masterGainNode.gain.value;
+  }
+}
+
+// Función para obtener volumen maestro
+export function getMasterVolume() {
+  if (!masterGainNode) return 1;
+  return masterGainNode.gain.value;
 }
